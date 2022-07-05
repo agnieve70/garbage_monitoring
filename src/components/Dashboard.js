@@ -70,13 +70,18 @@ function Dashboard() {
         window.location.href = "/";
     }
 
+    function mrfFormHandler(){
+        window.location.href = "/mrf-form";
+    }
+
   return (
     <div className="container mt-5">
         <div className="card p-5 shadow">
             <div className="row">
                 <div className="col-md-12 mb-3">
                     <h1>Dashboard</h1>
-                    <button onClick={logoutHandler} className="btn btn-primary">Logout</button>
+                    <button onClick={logoutHandler} className="btn btn-primary me-3">Logout</button>
+                    <button onClick={mrfFormHandler} className="btn btn-success">MRF Form</button>
                 </div>
                 <div className="col-md-4">
                     <SmallCard value={malata} title={'MALATA'} color={'success'} />

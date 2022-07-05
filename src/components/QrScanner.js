@@ -82,6 +82,7 @@ function Test() {
           }
 
           if (!!error) {
+            alert(error);
             console.info(error);
           }
         }}
