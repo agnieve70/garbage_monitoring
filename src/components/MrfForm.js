@@ -44,12 +44,11 @@ function MrfForm() {
     const [isSaved, setIsSaved] = useState(false);
     const [isError, setIsError] = useState(false);
     const [mrfs, setMrfs] = useState([]);
-    const [random, setRandom] = useState();
+    const [qr, setQr] = useState();
 
+    const random = Math.floor(Math.random() * 999999999);
 
     useEffect(() => {
-        setRandom(Math.floor(Math.random() * 999999999));
-
         getMrf().then((data) => {
             setMrfs(data);
         })
@@ -61,6 +60,7 @@ function MrfForm() {
             const result = await create(brgy, random);
             if (result) {
                 setIsSaved(true);
+                setQr(result.code);
             }
         } catch (e) {
             setIsError(true);
@@ -73,12 +73,10 @@ function MrfForm() {
                 <h2>Generate MRF QR</h2>
                 {isSaved &&  <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Success</strong> Garbage Data Saved.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>}
 
                 {isError && <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Failed!</strong> Could not save MRF
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>}
                 <form className='mb-3' action="" method='post' onSubmit={submitHandler}>
                     <div className="form-group mb-3">
@@ -88,8 +86,7 @@ function MrfForm() {
                         </select>
                         <button type='submit' className="btn btn-primary">Generate MRF QR</button>
                     </div>
-                    <p>{random}</p>
-                    {isSaved && <QRCodeCanvas value={random} />}
+                    {isSaved && <QRCodeCanvas value={`${qr}`} />}
                 </form>
                 <table className='table table-stripe'>
                     <thead>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { QrReader } from 'react-qr-reader';
 
 const auth_token = localStorage.getItem("auth_token");
@@ -48,6 +48,11 @@ function Test() {
   const [saved, setSaved] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  useEffect(()=>{
+    setSaved(false);
+    setIsError(false);
+    
+  }, [saved]);
   function logoutHandler() {
     localStorage.removeItem("auth_token");
     window.location.href = "/";
@@ -89,12 +94,10 @@ function Test() {
 
       {saved && <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success</strong> Garbage Data Saved.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>}
 
       {isError && <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>Failed!</strong>Please Contact Admin
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>}
 
       <p>MRF Result: <b>{data}</b></p>
