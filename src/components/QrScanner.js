@@ -77,12 +77,11 @@ function Test() {
 
         onResult={(result, error) => {
           if (!!result) {
-            alert(result?.text);
             setData(result?.text);
           }
 
           if (!!error) {
-            alert(error);
+            setData(error);
             console.info(error);
           }
         }}
