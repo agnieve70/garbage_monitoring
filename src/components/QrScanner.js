@@ -7,8 +7,13 @@ function Test(){
   return (
     <>
       <QrReader
+        constraints={{
+          facingMode: 'environment'
+        }}
+
         onResult={(result, error) => {
           if (!!result) {
+            alert(result?.text);
             setData(result?.text);
           }
 
