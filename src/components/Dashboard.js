@@ -42,10 +42,14 @@ function Dashboard() {
     const [diMalata, setDiMalata] = useState(0);
     const [halo, setHalo] = useState(0);
     const [garbages, setGarbages] = useState([]);
+    const [count, setCount] = useState(0);
+
+    setTimeout(function() { 
+        setCount(count + 1);
+    }, 5000);
 
     useEffect(() => {
 
-        setTimeout(function() { 
             getTotalPerType('malata').then((data)=> {
                 setMalata(data);
             });
@@ -62,8 +66,7 @@ function Dashboard() {
                 setGarbages(data);
                 console.log(data);
             })
-        }, 5000);
-    },[]);
+    },[count]);
 
     function logoutHandler(){
         localStorage.removeItem("auth_token");
@@ -74,6 +77,10 @@ function Dashboard() {
         window.location.href = "/mrf-form";
     }
 
+    function usersHandler(){
+        window.location.href = "/register-collector";
+    }
+
   return (
     <div className="container mt-5">
         <div className="card p-5 shadow">
@@ -81,7 +88,8 @@ function Dashboard() {
                 <div className="col-md-12 mb-3">
                     <h1>Dashboard</h1>
                     <button onClick={logoutHandler} className="btn btn-primary me-3">Logout</button>
-                    <button onClick={mrfFormHandler} className="btn btn-success">MRF Form</button>
+                    <button onClick={mrfFormHandler} className="btn btn-success me-3">MRF Form</button>
+                    <button onClick={usersHandler} className="btn btn-success">Manage Users</button>
                 </div>
                 <div className="col-md-4">
                     <SmallCard value={malata} title={'MALATA'} color={'success'} />

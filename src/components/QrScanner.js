@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { QrReader } from 'react-qr-reader';
 
 const auth_token = localStorage.getItem("auth_token");
@@ -48,10 +48,10 @@ function Test() {
   const [saved, setSaved] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setSaved(false);
     setIsError(false);
-    
+
   }, [saved]);
   function logoutHandler() {
     localStorage.removeItem("auth_token");
@@ -71,10 +71,24 @@ function Test() {
     }
   }
 
+  function clearHandler(){
+    setData("No Result");
+    setNoSacks(0);
+    setType("");
+    setSaved(false);
+    setIsError(false);
+  }
+
   return (
     <div className='container'>
-      <h1>Collect Garbages</h1>
-      <button onClick={logoutHandler} className="btn btn-primary">Logout</button>
+      <div className="row mt-4">
+        <div className="col-8">
+          <h1>Collect Garbages</h1>
+        </div>
+        <div className="col-4">
+          <button onClick={logoutHandler} className="btn btn-primary">Logout</button>
+        </div>
+      </div>
       <QrReader
         constraints={{
           facingMode: 'environment'
@@ -114,8 +128,9 @@ function Test() {
           <label htmlFor="no_sacks">No. of Sacks Collected</label>
           <input id='no_sacks' value={no_sacks} onChange={(e) => setNoSacks(e.target.value)} type="number" min={1} className='form-control' />
         </div>
-        <div class="d-grid gap-2">
+        <div class="d-grid gap-2 mb-5">
           <button class="btn btn-primary" type="submit">COLLECT DATA</button>
+          <button class="btn btn-secondary" onClick={clearHandler} type="button">CLEAR</button>
         </div>
       </form>
     </div>
