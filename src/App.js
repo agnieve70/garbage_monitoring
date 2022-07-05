@@ -3,6 +3,7 @@ import Dashboard from "./components/Dashboard.js";
 import Login from "./components/Login.js";
 import MrfForm from "./components/MrfForm.js";
 import Test from "./components/QrScanner.js";
+import RegisterCollector from "./components/RegisterCollector.js";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/qrScan" element={<Test />} />
                 <Route path="/mrf-form" element={<MrfForm />} />
+                <Route path="/register-collector" element={<RegisterCollector />} />
                 <Route
                     path="*"
                     element={

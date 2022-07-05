@@ -81,7 +81,6 @@ function Test() {
           }
 
           if (!!error) {
-            setData(error);
             console.info(error);
           }
         }}
