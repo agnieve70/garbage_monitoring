@@ -10,7 +10,7 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 async function login(email, password) {
 
-    const response = await fetch("/api/login", {
+    const response = await fetch("https://garbage-monitoring-backend.herokuapp.com/api/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
         headers: {
@@ -43,10 +43,10 @@ function Login() {
             setIsLoading(false);
 
             if(isMobile=== true){
-                localStorage.setItem("role", "client");
-                window.location.href = '/client-dashboard';
+                localStorage.setItem("role", "collector");
+                window.location.href = '/qrscan';
             }else{
-                window.location.href = '/admin-dashboard';
+                window.location.href = '/dashboard';
             }
         } catch (error) {
             setError(error);
